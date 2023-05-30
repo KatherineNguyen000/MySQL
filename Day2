@@ -1,1 +1,20 @@
+-- HW1. Show film with length < average length of all film
+SELECT * 
+FROM `cinema-k4`.film
+WHERE `cinema-k4`.film.length_min < (SELECT AVG(length_min) FROM `cinema-k4`.film);
 
+-- HW2. Show room and all seats
+SELECT seat.id, seat.row, seat.number, room.name
+FROM `cinema-k4`.seat JOIN `cinema-k4`.room ON seat.room_id = room.id;
+
+-- HW3. Show film without any booking
+SELECT distinct film.name
+FROM `cinema-k4`.film
+LEFT JOIN `cinema-k4`.screening ON screening.film_id = film.id
+LEFT JOIN `cinema-k4`.booking ON booking.screening_id = screening.id
+WHERE booking.id is NULL;
+
+-- HW4. SHOW all customers who never book
+SELECT customer.first_name, customer.last_name
+FROM `cinema-k4`.customer LEFT JOIN `cinema-k4`.booking ON booking.customer_id = customer.id
+WHERE booking.id is NULL;
