@@ -1,7 +1,7 @@
 -- HW1. Show film with length < average length of all film
 SELECT * 
 FROM `cinema-k4`.film
-WHERE `cinema-k4`.film.length_min < (SELECT AVG(length_min) FROM `cinema-k4`.film);
+WHERE film.length_min < (SELECT AVG(length_min) FROM `cinema-k4`.film);
 
 -- HW2. Show room and all seats
 SELECT seat.id, seat.row, seat.number, room.name
